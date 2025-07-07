@@ -2,7 +2,9 @@ package com.dev.spring.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -10,8 +12,12 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String name;
+
+    @Transient
+    private Set<Product> products = new HashSet<>();
 
     public Category(){}
 
@@ -22,6 +28,10 @@ public class Category {
 
     public Long getId() {
         return id;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public void setId(Long id) {
@@ -48,4 +58,6 @@ public class Category {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+
 }
